@@ -4,42 +4,41 @@ using namespace std;
 
 bool checkInclusion(string s1, string s2)
 {
-    map<char, int> m;
-    for (auto &el : s1)
-        m[el]++;
+    if (s1.length() > s2.length())
+        return false;
+    int firstMap[26]{};
+    int secondMap[26]{};
 
     int i = 0, j = 0;
-    char debugJ;
-    char debugI;
+    for (j = 0; j < s1.length(); j++)
+    {
+        firstMap[s1[j] - 97]++;
+        secondMap[s2[j] - 97]++;
+    }
+
+    int matches = 0;
+    for (int k = 0; k < 26; k++)
+        if (firstMap[k] == secondMap[k])
+            matches++;
+
     while (j < s2.length())
     {
-        if (m.count(s2[j]))
-        {
-            if (m[s2[j]])
-            {
-                m[s2[j]]--;
-                if (s1.length() == j - i + 1)
-                {
-                    return true;
-                }
-                j++;
-            }
-            else
-            {
-                m[s2[i]]++;
-                i++;
-            }
-        }
-        else
-        {
-            while (i < j)
-            {
-                m[s2[i]]++;
-                i++;
-            }
-            i++;
-            j++;
-        }
+        if (matches == 26)
+            return true;
+        if (secondMap[s2[i] - 97] == firstMap[s2[i] - 97])
+            matches--;
+        secondMap[s2[i] - 97]--;
+        if (secondMap[s2[i] - 97] == firstMap[s2[i] - 97])
+            matches++;
+        i++;
+        if (secondMap[s2[j] - 97] == firstMap[s2[j] - 97])
+            matches--;
+        secondMap[s2[j] - 97]++;
+        if (secondMap[s2[j] - 97] == firstMap[s2[j] - 97])
+            matches++;
+        j++;
+        if (matches == 26)
+            return true;
     }
     return false;
 }
