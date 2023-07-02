@@ -5,7 +5,10 @@ using namespace std;
 void generator(vector<int> &nums, vector<vector<int>> &res, vector<int> &subset, int &target, int sum, int index)
 {
     if (sum == target)
+    {
         res.push_back(subset);
+        return;
+    }
 
     else if (sum > target)
         return;
