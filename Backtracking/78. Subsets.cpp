@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void generator(vector<int> &nums, vector<vector<int>> &res, vector<int> subset, int count)
+void generator(vector<int> &nums, vector<vector<int>> &res, vector<int> &subset, int count)
 {
     for (int i = count; i < nums.size(); i++)
     {
